@@ -2,9 +2,19 @@ export enum ObservableModelEvent {
     uuidUpdate = 'ObservableModelUuidUpdate',
 }
 
+
+export enum StoreEvent {
+    uuidUpdate = "StoreUuidUpdate",
+    hintUpdate = "StoreHintUpdate",
+    gameUpdate = "StoreGameUpdate",
+    balanceUpdate = "StoreBalanceUpdate",
+    stateUpdate = "StoreStateUpdate",
+}
+
 export enum GameModelEvent {
     uuidUpdate = "GameModelUuidUpdate",
-    cellsUpdate = "GameModelCellsUpdate"
+    cellsUpdate = "GameModelCellsUpdate",
+    margeCountUpdate = "GameModelMargeCountUpdate"
 }
 
 
@@ -16,4 +26,9 @@ export enum BalanceModelEvent {
 export enum CellModelEvent {
     itemIndexUpdate = "CellModelItemIndexUpdate",
     stateUpdate = "CellModelStateUpdate"
+}
+
+
+export enum HintModelEvent {
+    stateUpdate = "HintModelStateUpdate"
 }

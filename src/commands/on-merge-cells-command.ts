@@ -26,6 +26,7 @@ export const onMergeCellsCommand = (cell1: CellVIew, cell2: CellVIew): void => {
         }
 
         cellModel2.state = CellStates.marge;
+        store.game.margeCount += 1;
     } else {
         cellModel1.itemIndex = cell2Item;
         cellModel2.itemIndex = cell1Item;

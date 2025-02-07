@@ -1,9 +1,16 @@
 import { lego } from '@armathai/lego';
-import { CellViewEvent, GameViewEvent } from '../events/view';
+import { GameEvent } from '../events/game';
+import { GameModelEvent } from '../events/model';
+import { CellViewEvent, CtaViewEvent, GameViewEvent } from '../events/view';
 import { onColectEffectCompleteCommand } from './on-colect-effect-complete-command';
+import { onDocumentBodyPointerdownCommand } from './on-document-body-pointerdow-command';
+import { onDocumentBodyPointerupCommand } from './on-document-body-pointerup-command';
+import { onGameResizeCommand } from './on-game-resize-command';
 import { onItemClickCommand } from './on-item-click-command';
+import { onMargeCountUpdateCommand } from './on-marge-count-update-command';
 import { onMergeCellsCommand } from './on-merge-cells-command';
 import { onMargeEffectCompleteCommand } from './on-merge-effect-complete-command';
+import { onPlayAgainButtonClickCommand } from './on-play-again-button-click-command';
 
 export const mapGameCommandsCommand = (): void => {
     lego.command
@@ -11,12 +18,9 @@ export const mapGameCommandsCommand = (): void => {
         .on(CellViewEvent.onItemClick, onItemClickCommand)
         .on(CellViewEvent.onMargeEffectComplete, onMargeEffectCompleteCommand)
         .on(CellViewEvent.onColectEffectComplete, onColectEffectCompleteCommand)
-    //     .on(MenuItemViewEvent.activeButtonClick, onMenuItemActiveButtonClickCommand)
-    //     .on(MenuItemViewEvent.upgradeButtonClick, onMenuItemUpgradeButtonClickCommand)
-    //     .on(BotViewEvent.click, onBotClickCommand)
-    //     .on(BossViewEvent.click, onBossClickCommand)
-    //     .on(BotModelEvent.defeatUpdate, onBotDefeatUpdateCommand)
-    //     .on(BossModelEvent.reviveTimerCompleteUpdate, onBossReviveTimerCompleteUpdateCommand)
-    //     .on(BossModelEvent.defeatUpdate, onBossDefeatUpdateCommand)
-    //     .on(FriendModelEvent.stateUpdate, onFriendStateUpdateCommand);
+        .on(GameEvent.documentBodyPointerDown, onDocumentBodyPointerdownCommand)
+        .on(GameEvent.documentBodyPointerUp, onDocumentBodyPointerupCommand)
+        .on(GameEvent.resize, onGameResizeCommand)
+        .on(GameModelEvent.margeCountUpdate, onMargeCountUpdateCommand)
+        .on(CtaViewEvent.playAgainClick, onPlayAgainButtonClickCommand);
 };

@@ -14,5 +14,6 @@ export const onItemClickCommand = (cell: CellVIew): void => {
         cellModel.itemIndex = -1;
 
         cellModel.state = CellStates.colect;
+        store.game.margeCount += 1;
     }
 }

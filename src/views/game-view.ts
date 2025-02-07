@@ -2,6 +2,7 @@ import { lego } from '@armathai/lego';
 import { ICellConfig, PixiGrid } from '@armathai/pixi-grid';
 import { Container, Point } from 'pixi.js';
 import { getGameGridConfig } from '../configs/grid-configs';
+import { CELL_SIZE } from '../configs/items-config';
 import { GameModelEvent } from '../events/model';
 import { CellViewEvent, GameViewEvent } from '../events/view';
 import { CellModel } from '../models/cell-model';
@@ -17,6 +18,8 @@ export class GameView extends PixiGrid {
 
         lego.event.on(GameModelEvent.cellsUpdate, this._onCellsUpdate, this);
         lego.event.on(CellViewEvent.onPointerUp, this._onItemPointerUp, this);
+        // lego.event.on(StoreEvent.gameUpdate, this._onGameUpdate, this);
+
     }
 
     public getGridConfig(): ICellConfig {
@@ -28,34 +31,57 @@ export class GameView extends PixiGrid {
         super.rebuild(config);
     }
 
-    private _onCellsUpdate(cells: CellModel[]): void {
-        this._board = new Container();
+    public getCellViewByColAndRow(col: number, row: number): CellVIew {
+        return this._cells.find(cell => cell.col == col && cell.row == row);
+    }
 
-        cells.forEach(cellModel => {
-            const cell = new CellVIew(cellModel);
-            this._board.addChild(cell);
-            this._cells.push(cell);
-            cell.init()
-        })
-        this._cellsPositonsUpdate();
-        this.setChild("board", this._board);
+    private _onCellsUpdate(cells: CellModel[]): void {
+        if (!!cells) {
+            this._board = new Container();
+
+            cells.forEach(cellModel => {
+                const cell = new CellVIew(cellModel);
+                this._board.addChild(cell);
+                this._cells.push(cell);
+                cell.init()
+            })
+            this._cellsPositonsUpdate();
+            this.setChild("board", this._board);
+        } else {
+            this._cells.forEach(cell => {
+                cell.destroy();
+                this._board.removeChild(cell);
+            });
+
+            this.removeChild(this._board);
+            this._board.destroy();
+            this._cells = [];
+            this._board = null;
+        }
+
     }
 
     private _cellsPositonsUpdate(): void {
         lp(this._onCellsRebuildToL, this._onCellsRebuildToP).call(this);
     }
 
+    // private _onGameUpdate(model: GameModel): void {
+    //     if (!model) {
+
+    //     }
+    // }
+
     private _onCellsRebuildToP(): void {
         this._cells.forEach(cell => {
             const { col, row } = cell;
-            cell.position.set(row * 165, col * 165);
+            cell.position.set(row * CELL_SIZE, col * CELL_SIZE);
         })
     }
 
     private _onCellsRebuildToL(): void {
         this._cells.forEach(cell => {
             const { col, row } = cell;
-            cell.setPosition(col * 165, row * 165);
+            cell.setPosition(col * CELL_SIZE, row * CELL_SIZE);
         })
     }
 
@@ -71,14 +97,14 @@ export class GameView extends PixiGrid {
     }
 
     _getCellByPosP(pos: Point): CellVIew {
-        const row = Math.round(pos.x / 165);
-        const col = Math.round(pos.y / 165);
+        const row = Math.round(pos.x / CELL_SIZE);
+        const col = Math.round(pos.y / CELL_SIZE);
         return this._cells.find(cell => cell.row == row && cell.col == col);
     }
 
     _getCellByPosL(pos: Point): CellVIew {
-        const col = Math.round(pos.x / 165);
-        const row = Math.round(pos.y / 165);
+        const col = Math.round(pos.x / CELL_SIZE);
+        const row = Math.round(pos.y / CELL_SIZE);
         return this._cells.find(cell => cell.row == row && cell.col == col);
     }
 }

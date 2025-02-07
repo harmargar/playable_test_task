@@ -12,3 +12,9 @@ export enum CellViewEvent {
 export enum GameViewEvent {
     mergeCells = "GameViewEventMergeCells"
 }
+
+
+
+export enum CtaViewEvent {
+    playAgainClick = "CtaViewEventPlayAgainClick"
+}

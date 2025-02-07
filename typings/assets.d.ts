@@ -1,9 +1,9 @@
 type FontAsset = { config: WebFont.Config };
 
-type SoundAsset = {
-    spritemap: Record<string, { start: number; end: number; loop: boolean }>;
-    url: string;
-};
+// type SoundAsset = {
+//     spritemap: Record<string, { start: number; end: number; loop: boolean }>;
+//     url: string;
+// };
 
 type AtlasAsset = Record<string, { json: string; image: string }>;
 

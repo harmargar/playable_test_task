@@ -1,5 +1,5 @@
 
-import { ICellConfig, IRawBounds } from '@armathai/pixi-grid';
+import { CellScale, ICellConfig, IRawBounds } from '@armathai/pixi-grid';
 
 
 function getCanvasBounds(): IRawBounds {
@@ -17,6 +17,11 @@ export const getMainGridLandscapeConfig = (): ICellConfig => {
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
                 // scale: CellScale.fill
             },
+            {
+                name: 'blocker',
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+                scale: CellScale.fill
+            },
         ],
     };
 };
@@ -31,6 +36,11 @@ export const getMainGridPortraitConfig = (): ICellConfig => {
                 name: 'effect',
                 bounds: { x: 0, y: 0, width: 1, height: 1 },
                 // scale: CellScale.fill
+            },
+            {
+                name: 'blocker',
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+                scale: CellScale.fill
             },
         ],
     };

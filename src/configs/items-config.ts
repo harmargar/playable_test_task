@@ -29,11 +29,7 @@ export const ITEMS_INDEX: string[] = [
     "merge_item_key_l4.png",
     "coins_01.png",
     "coins_02.png",
-    "coins_03.png",
-    "coins_4.png",
-    "coins_5.png",
-    "lightning_1.png",
-    "lightning_2.png",
+    "coins_03.png"
 ]
 
 export const ITEMS_GRUP:
@@ -46,7 +42,9 @@ export const ITEMS_GRUP:
         [17, 18, 19],
         [20, 21, 22, 23],
         [26, 27, 24, 25],
-        [28, 29, 30, 31, 32, 33, 34]
+        [28, 29, 30]
     ]
 
-export const CLIME_ITEMS: number[] = [32, 34];
+export const CLIME_ITEMS: number[] = [30];
+
+export const CELL_SIZE = 83;

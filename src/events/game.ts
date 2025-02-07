@@ -9,4 +9,6 @@ export enum GameEvent {
     resume = 'GameEventResume',
     pause = 'GameEventPause',
     configsUpdate = 'GameEventConfigsUpdate',
+    documentBodyPointerDown = 'GameEventDocumentBodyPointerDown',
+    documentBodyPointerUp = 'GameEventDocumentBodyPointerUp'
 }

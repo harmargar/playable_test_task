@@ -1,16 +1,30 @@
 import { gameConfig } from '../configs/game-config';
+import { StorStates } from '../constants/states';
 import { postRunnable } from '../utils';
 import { BalanceModel } from './balance-model';
 import { GameModel } from './game-model';
+import { HintModel } from './hint-model';
 import { ObservableModel } from './observable-model';
 
 class Store extends ObservableModel {
     private _game: GameModel;
-    private _balance: BalanceModel
+    private _balance: BalanceModel;
+    private _hint: HintModel;
+    private _state: StorStates
 
     public constructor() {
         super('Store');
-        this.makeObservable("_game", "_balance");
+        this.makeObservable("_game", "_balance", "_hint", "_state");
+
+        this._state = StorStates.idel;
+    }
+
+    public get state(): StorStates {
+        return this._state;
+    }
+
+    public set state(value: StorStates) {
+        this._state = value;
     }
 
     public get game(): GameModel {
@@ -29,6 +43,14 @@ class Store extends ObservableModel {
         this._balance = value;
     }
 
+    public get hint(): HintModel {
+        return this._hint;
+    }
+
+    public set hint(value) {
+        this._hint = value;
+    }
+
     // GAME
     public initializeGameModel(): void {
         this._game = new GameModel(gameConfig);
@@ -43,7 +65,7 @@ class Store extends ObservableModel {
     }
 
 
-    // GAME
+    // BALANCE
     public initializeBalanceModel(): void {
         this._balance = new BalanceModel();
         postRunnable(() => {
@@ -54,6 +76,20 @@ class Store extends ObservableModel {
     public destroyBalanceModel(): void {
         this._balance?.destroy();
         this._balance = null;
+    }
+
+
+    // HINT
+    public initializeHintModel(): void {
+        this._hint = new HintModel();
+        postRunnable(() => {
+            this._hint.initialize();
+        });
+    }
+
+    public destroyHintModel(): void {
+        this._hint?.destroy();
+        this._hint = null;
     }
 }
 

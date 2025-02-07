@@ -64,24 +64,6 @@ export const postRunnable = (
     delayRunnable(Ticker.shared.deltaMS / 1000, runnable, context, ...args);
 };
 
-// export const fitText = (textObject: Text, width: number, height?: number): void => {
-//     // @ts-ignore
-//     if (!textObject.defaultFontSize) {
-//         // @ts-ignore
-//         textObject.defaultFontSize = textObject.style.fontSize;
-//     }
-
-//     // @ts-ignore
-//     textObject.style.fontSize = textObject.defaultFontSize;
-
-//     const textMetrics = TextMetrics.measureText(textObject.text, textObject.style as TextStyle);
-//     const { width: textWidth, height: textHeight } = textMetrics;
-//     const ratioW = width ? width / textWidth : 1;
-//     const ratioH = height ? height / textHeight : 1;
-//     const ratio = Math.min(Math.min(ratioW, ratioH), 1);
-//     (textObject.style.fontSize as number) *= ratio;
-// };
-
 export const makeSprite = (config: SpriteConfig | string): Sprite => {
     const {
         texture,
@@ -105,20 +87,6 @@ export const makeSprite = (config: SpriteConfig | string): Sprite => {
 
 export const makeTexture = (config: TextureConfig): Texture => Texture.from(config);
 
-// export const makeNineSlice = (config: NineSliceConfig): NineSlicePlane => {
-//     const { texture, data, width, height, x = 0, y = 0, tint, scale = new Point(1, 1) } = config;
-
-//     const img = new NineSlicePlane(Texture.from(texture), ...data);
-//     img.width = width;
-//     img.height = height;
-
-//     img.scale.copyFrom(scale);
-//     img.position.set(x, y);
-
-//     if (tint) img.tint = tint;
-
-//     return img;
-// };
 
 export function makeText(config: TextConfig): Text {
     const { text, style, x = 0, y = 0, anchor = new Point(0.5, 0.5) } = config;
@@ -129,14 +97,6 @@ export function makeText(config: TextConfig): Text {
 
     return label;
 }
-
-// export function makeParticleEffect(
-//     config: ParticleConfig,
-// ): import('../display/particle-effect').ParticleEffectDisplayObject {
-//     // eslint-disable-next-line @typescript-eslint/naming-convention
-//     const { ParticleEffectDisplayObject } = require('../display/particle-effect');
-//     return new ParticleEffectDisplayObject(config);
-// }
 
 export function makeAnimation(config: AnimationConfig): AnimatedSprite {
     const {
@@ -159,20 +119,6 @@ export function makeAnimation(config: AnimationConfig): AnimatedSprite {
 
     return anim;
 }
-
-// export function makeSpine(config: SpineConfig): import('../display/spine').SpineDisplayObject {
-//     const { skeleton, x = 0, y = 0, scale = new Point(1, 1), speed = 1 } = config;
-
-//     // eslint-disable-next-line @typescript-eslint/naming-convention
-//     const { SpineDisplayObject } = require('../display/spine');
-//     const spine = new SpineDisplayObject(skeleton);
-//     spine.state.timeScale = speed;
-
-//     spine.scale.set(scale.x, scale.y);
-//     spine.position.set(x, y);
-
-//     return spine;
-// }
 
 export const getDisplayObjectByProperty = (prop: string, value: string, parent?: Container): DisplayObject => {
     const application = game;

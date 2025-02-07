@@ -1,7 +1,8 @@
 import { lego } from '@armathai/lego';
 import { Emitter } from '@pixi/particle-emitter';
-import { Assets, Container, FederatedPointerEvent, Point, Sprite } from 'pixi.js';
-import { CoinParticleConfig } from '../configs/particles-config';
+import { Container, FederatedPointerEvent, Point, Sprite, Texture } from 'pixi.js';
+import { ExplosionAnimationData, MergeAnimationData } from '../configs/animations-config';
+import { getCoinParticleConfig } from '../configs/particles-config';
 import { CellStates } from '../constants/states';
 import { CellModelEvent } from '../events/model';
 import { CellViewEvent } from '../events/view';
@@ -83,16 +84,17 @@ export class CellVIew extends Container {
             anchor: new Point(0.5, 0.5),
             scale: new Point(0.5, 0.5),
         }
+
         const animatedSprite = makeAnimation(
             {
-                frames: Object.keys(Assets.get("explosion").textures),
+                frames: ExplosionAnimationData,
                 ...conf
             })
 
 
         const animatedSprite1 = makeAnimation(
             {
-                frames: Object.keys(Assets.get("merge").textures),
+                frames: MergeAnimationData,
                 ...conf
             })
 
@@ -108,8 +110,8 @@ export class CellVIew extends Container {
 
         animatedSprite1.position.set(x, y);
         animatedSprite.position.set(x, y);
-        animatedSprite.scale.set(scale);
-        animatedSprite1.scale.set(scale);
+        animatedSprite.scale.set(scale + 0.2);
+        animatedSprite1.scale.set(scale + 0.2);
 
         animatedSprite.onComplete = () => {
             lego.event.emit(CellViewEvent.onMargeEffectComplete, this._cellModel.uuid);
@@ -127,11 +129,10 @@ export class CellVIew extends Container {
     private _onStateColect(): void {
         const effectView = <Container>getDisplayObjectByProperty('name', "EffectView");
         const particleContainer = new Container();
-        const { a: scale } = this.worldTransform;
         effectView.addChild(particleContainer);
         const { x, y } = effectView.toLocal(this.toGlobal({ x: 0, y: 0 }));
         particleContainer.position.set(x, y);
-        const emitter = new Emitter(particleContainer, CoinParticleConfig);
+        const emitter = new Emitter(particleContainer, getCoinParticleConfig(Texture.from('coins_01.png')));
         emitter.emit = true;
 
         delayRunnable(emitter.emitterLifetime, () => {
@@ -147,7 +148,7 @@ export class CellVIew extends Container {
 
 
     private _buildBg(): void {
-        const bg = makeSprite("cell_bg");
+        const bg = makeSprite("Field_BG_mystery_version.png");
         bg.anchor.set(0.5);
         this.addChild(this._bg = bg);
     }

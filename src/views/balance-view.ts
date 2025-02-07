@@ -19,12 +19,12 @@ export class BalanceView extends Container {
     }
 
     private _buildSprite(): void {
-        const sprite = makeSprite({ texture: "balance_bar", anchor: new Point(0.7, 0.45) });
+        const sprite = makeSprite({ texture: "balance_bar.png", anchor: new Point(0.7, 0.4) });
         this.addChild(sprite);
     }
 
     private _buildText(): void {
-        const text = makeText({ text: '0', style: { align: 'center', fontSize: 80, fontFamily: "Tobi_Greek", fill: 0x9f5847 } });
+        const text = makeText({ text: '0', style: { align: 'center', fontSize: 38, fontFamily: "Tobi_Greek", fontWeight: '900', fill: 0x9f5847 } });
         this.addChild(this._text = text);
     }
 
