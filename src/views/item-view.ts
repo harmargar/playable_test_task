@@ -1,6 +1,6 @@
 import { Container, FederatedPointerEvent, Sprite } from 'pixi.js';
-import { ITEMS_INDEX } from '../configs/items-config';
-import { makeSprite } from '../utils';
+import { CLIME_ITEMS, ITEMS_INDEX } from '../configs/items-config';
+import { getDisplayObjectByProperty, makeSprite } from '../utils';
 
 export class ItemView extends Container {
     private _sprite: Sprite;
@@ -23,15 +23,16 @@ export class ItemView extends Container {
         this.addChild((this._sprite = sprite));
     }
 
-    private _makeInteractive(): void {
-        this.eventMode = 'static'; // Включаем события в PixiJS 7
-        this.cursor = 'pointer'; // Меняем курсор на pointer
+    // private _buildTile(): void {
 
+    // }
+
+    private _makeInteractive(): void {
+        this.eventMode = 'static';
+        this.cursor = 'pointer';
         this.on('pointerdown', this._onPointerDown, this);
         this.on('pointerup', this._onPointerUp, this);
         this.on('pointerupoutside', this._onPointerUp, this);
-
-        // Убеждаемся, что stage тоже реагирует на события
         if (window.game) {
             window.game.stage.eventMode = 'static';
             window.game.stage.hitArea = window.game.screen;
@@ -42,34 +43,32 @@ export class ItemView extends Container {
     }
 
     private _onPointerDown(e: FederatedPointerEvent): void {
+        if (CLIME_ITEMS.find((index) => index == this._index)) {
+            this.emit('onPointerDown');
+            return;
+        }
+        this.emit('onPointerDown');
         this._isDragging = true;
-        // this.alpha = 0.5;
-        // const oldScale = this.scale
-        // this.scale.set(oldScale.x + 0.2, oldScale.y + 0.2);
-
-        // Запоминаем смещение курсора относительно объекта
-        const localPos = e.getLocalPosition(this);
-        this._dragOffset.x = localPos.x;
-        this._dragOffset.y = localPos.y;
+        const globalPos = e.global;
+        const newPosition = this.parent.toLocal(globalPos);
+        this.position.set(newPosition.x, newPosition.y);
     }
 
     private _onPointerMove(e: FederatedPointerEvent): void {
         if (!this._isDragging) return;
-
-        // Получаем глобальную позицию курсора
         const globalPos = e.global;
-
-        // Переводим в локальные координаты родителя
         const newPosition = this.parent.toLocal(globalPos);
-
-        // Перемещаем с учетом изначального смещения
         this.position.set(newPosition.x - this._dragOffset.x, newPosition.y - this._dragOffset.y);
     }
 
-    private _onPointerUp(): void {
+    private _onPointerUp(e: FederatedPointerEvent): void {
+        if (!this._isDragging) return;
         this._isDragging = false;
         this.position.set(0, 0);
         this.alpha = 1;
+        const effectView = <Container>getDisplayObjectByProperty('name', "EffectView");
+        effectView.interactiveChildren = false;
+        this.emit('onPointerUp', e);
     }
 
     public destroy(): void {

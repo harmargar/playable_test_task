@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 
-import { Container, DisplayObject, Point, Sprite, Text, Texture, Ticker } from 'pixi.js';
+import { AnimatedSprite, Container, DisplayObject, Point, Sprite, Text, Texture, Ticker } from 'pixi.js';
 
 
 const isString = (str: unknown): boolean => {
@@ -130,49 +130,49 @@ export function makeText(config: TextConfig): Text {
     return label;
 }
 
-// // export function makeParticleEffect(
-// //     config: ParticleConfig,
-// // ): import('../display/particle-effect').ParticleEffectDisplayObject {
-// //     // eslint-disable-next-line @typescript-eslint/naming-convention
-// //     const { ParticleEffectDisplayObject } = require('../display/particle-effect');
-// //     return new ParticleEffectDisplayObject(config);
-// // }
-
-// export function makeAnimation(config: AnimationConfig): AnimatedSprite {
-//     const {
-//         frames = [],
-//         speed = 1,
-//         loop = false,
-//         x = 0,
-//         y = 0,
-//         scale = new Point(1, 1),
-//         anchor = new Point(0, 0),
-//     } = config;
-
-//     const anim = AnimatedSprite.fromFrames(frames);
-//     anim.animationSpeed = speed;
-//     anim.loop = loop;
-
-//     anim.anchor.set(anchor.x, anchor.y);
-//     anim.scale.set(scale.x, scale.y);
-//     anim.position.set(x, y);
-
-//     return anim;
+// export function makeParticleEffect(
+//     config: ParticleConfig,
+// ): import('../display/particle-effect').ParticleEffectDisplayObject {
+//     // eslint-disable-next-line @typescript-eslint/naming-convention
+//     const { ParticleEffectDisplayObject } = require('../display/particle-effect');
+//     return new ParticleEffectDisplayObject(config);
 // }
 
-// // export function makeSpine(config: SpineConfig): import('../display/spine').SpineDisplayObject {
-// //     const { skeleton, x = 0, y = 0, scale = new Point(1, 1), speed = 1 } = config;
+export function makeAnimation(config: AnimationConfig): AnimatedSprite {
+    const {
+        frames = [],
+        speed = 1,
+        loop = false,
+        x = 0,
+        y = 0,
+        scale = new Point(1, 1),
+        anchor = new Point(0, 0),
+    } = config;
 
-// //     // eslint-disable-next-line @typescript-eslint/naming-convention
-// //     const { SpineDisplayObject } = require('../display/spine');
-// //     const spine = new SpineDisplayObject(skeleton);
-// //     spine.state.timeScale = speed;
+    const anim = AnimatedSprite.fromFrames(frames);
+    anim.animationSpeed = speed;
+    anim.loop = loop;
 
-// //     spine.scale.set(scale.x, scale.y);
-// //     spine.position.set(x, y);
+    anim.anchor.set(anchor.x, anchor.y);
+    anim.scale.set(scale.x, scale.y);
+    anim.position.set(x, y);
 
-// //     return spine;
-// // }
+    return anim;
+}
+
+// export function makeSpine(config: SpineConfig): import('../display/spine').SpineDisplayObject {
+//     const { skeleton, x = 0, y = 0, scale = new Point(1, 1), speed = 1 } = config;
+
+//     // eslint-disable-next-line @typescript-eslint/naming-convention
+//     const { SpineDisplayObject } = require('../display/spine');
+//     const spine = new SpineDisplayObject(skeleton);
+//     spine.state.timeScale = speed;
+
+//     spine.scale.set(scale.x, scale.y);
+//     spine.position.set(x, y);
+
+//     return spine;
+// }
 
 export const getDisplayObjectByProperty = (prop: string, value: string, parent?: Container): DisplayObject => {
     const application = game;

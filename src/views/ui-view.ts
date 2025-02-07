@@ -7,7 +7,6 @@ export class UIView extends PixiGrid {
     public constructor() {
         super();
         this.name = 'UIView';
-
         this._init();
     }
 

@@ -41,8 +41,10 @@ declare let game: import('../src/game').Game;
 // };
 
 type GameConfig = {
-    cells: number[][];
+    rows: number;
+    cols: number;
     startingBalance: number,
+    margeCount: number,
 }
 
 interface Navigator {

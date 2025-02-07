@@ -11,7 +11,13 @@ export const getMainGridLandscapeConfig = (): ICellConfig => {
         name: 'main',
         // debug: { color: 0xd95027 },
         bounds: getCanvasBounds(),
-        // padding: { y: 0.05 },
+        cells: [
+            {
+                name: 'effect',
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+                // scale: CellScale.fill
+            },
+        ],
     };
 };
 
@@ -20,6 +26,12 @@ export const getMainGridPortraitConfig = (): ICellConfig => {
         name: 'main',
         // debug: { color: 0xd95027 },
         bounds: getCanvasBounds(),
-        // padding: { y: 0.05 },
+        cells: [
+            {
+                name: 'effect',
+                bounds: { x: 0, y: 0, width: 1, height: 1 },
+                // scale: CellScale.fill
+            },
+        ],
     };
 };

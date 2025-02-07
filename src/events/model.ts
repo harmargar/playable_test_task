@@ -11,3 +11,9 @@ export enum GameModelEvent {
 export enum BalanceModelEvent {
     valueUpdate = "BalanceModelValueUpdate"
 }
+
+
+export enum CellModelEvent {
+    itemIndexUpdate = "CellModelItemIndexUpdate",
+    stateUpdate = "CellModelStateUpdate"
+}

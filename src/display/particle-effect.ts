@@ -1,5 +1,5 @@
 // import { ParticleEffect } from '@armathai/pixi-particles';
-// import { BaseTexture, Texture } from '@pixi/core';
+// import { BaseTexture } from '@pixi/core';
 // import { Point } from '@pixi/math';
 // import { Ticker } from '@pixi/ticker';
 

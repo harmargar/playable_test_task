@@ -8,7 +8,6 @@ export class BalanceView extends Container {
 
     constructor() {
         super()
-
         this._init();
 
         lego.event.on(BalanceModelEvent.valueUpdate, this._onBalanceUpdate, this);
