@@ -1,4 +1,5 @@
 import { lego } from '@armathai/lego';
+import { sound } from '@pixi/sound';
 import "pixi-spine";
 import * as PIXI from "pixi.js";
 import { startupCommand } from './commands/startup-command';
@@ -15,20 +16,21 @@ window.game = app;
 
 window.onload = async (): Promise<void> => {
     await loadGameAssets();
+    await loadSounds();
     document.body.appendChild(app.view);
     lego.event.emit(GameEvent.init);
     let main: MainView;
-    // sound.play("bgm_groovy", { loop: true });
+
     app.stage.addChild(main = new MainView());
     lego.event.emit(GameEvent.start);
 
     document.body.addEventListener('pointerdown', () => {
-        lego.event.emit(GameEvent.documentBodyPointerDown)
-    })
+        lego.event.emit(GameEvent.documentBodyPointerDown);
+    });
 
     document.body.addEventListener('pointerup', () => {
-        lego.event.emit(GameEvent.documentBodyPointerUp)
-    })
+        lego.event.emit(GameEvent.documentBodyPointerUp);
+    });
 };
 
 async function loadGameAssets(): Promise<void> {
@@ -62,19 +64,21 @@ async function loadGameAssets(): Promise<void> {
                     },
                 ],
             },
-            {
-                name: 'effects',
-                assets: [
-                    {
-                        name: "glitter",
-                        srcs: "./assets/glitter.json",
-                    },
-                ],
-            },
         ],
     };
 
     await PIXI.Assets.init({ manifest });
-    await PIXI.Assets.loadBundle(["items", "ui", "fonts", "effects"]);
+    await PIXI.Assets.loadBundle(["items", "ui", "fonts"]);
     // sound.add("bgm_groovy", "./assets/sounds/bgm_groovy.mp4");
+}
+
+
+async function loadSounds(): Promise<void> {
+    const response = await fetch('./assets/sounds/spritemap.json');
+    const spritemap = await response.json();
+
+    sound.add('spritemap', {
+        url: "./assets/sounds/spritemap.mp3",
+        sprites: spritemap,
+    });
 }

@@ -1,42 +1,37 @@
 {
-    "bgm_groovy": {
-        "start": 0,
-        "end": 79.11038548752835,
-        "loop": false
-    },
-    "coinsb_boom": {
-        "start": 81,
-        "end": 83.91024943310657,
-        "loop": false
-    },
-    "collect_item": {
-        "start": 85,
-        "end": 88.70938775510204,
-        "loop": false
-    },
-    "merge_expedition_energy_field": {
-        "start": 90,
-        "end": 91.2954195011338,
-        "loop": false
-    },
-    "merge_item_move": {
-        "start": 93,
-        "end": 93.08031746031746,
-        "loop": false
-    },
-    "merge_merge_energy_field": {
-        "start": 95,
-        "end": 96.2954195011338,
-        "loop": false
-    },
-    "spritemap": {
-        "start": 98,
-        "end": 381,
-        "loop": false
-    },
-    "wood_button_tap_03": {
-        "start": 382,
-        "end": 382.450566893424,
-        "loop": false
-    }
+  "bgm_groovy": {
+    "start": 0,
+    "end": 79.11038548752835,
+    "loop": false
+  },
+  "coinsb_boom": {
+    "start": 81,
+    "end": 83.91024943310657,
+    "loop": false
+  },
+  "collect_item": {
+    "start": 85,
+    "end": 88.70938775510204,
+    "loop": false
+  },
+  "merge_expedition_energy_field": {
+    "start": 90,
+    "end": 91.2954195011338,
+    "loop": false
+  },
+  "merge_item_move": {
+    "start": 93,
+    "end": 93.08031746031746,
+    "loop": false
+  },
+  "merge_merge_energy_field": {
+    "start": 95,
+    "end": 96.2954195011338,
+    "loop": false
+  },
+  "wood_button_tap_03": {
+    "start": 98,
+    "end": 98.45056689342404,
+    "loop": false
+  }
 }

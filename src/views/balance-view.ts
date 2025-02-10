@@ -19,7 +19,7 @@ export class BalanceView extends Container {
     }
 
     private _buildSprite(): void {
-        const sprite = makeSprite({ texture: "balance_bar.png", anchor: new Point(0.7, 0.4) });
+        const sprite = makeSprite({ texture: "balance_bar.png", anchor: new Point(0.7, 0.45) });
         this.addChild(sprite);
     }
 

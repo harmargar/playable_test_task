@@ -15,3 +15,9 @@ export enum HintState {
     show = "HintShowState",
     hide = "HintHideState"
 }
+
+export enum SoundState {
+    idle = "SoundIdelState",
+    on = "SoundOnState",
+    off = "SoundOffState"
+}

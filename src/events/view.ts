@@ -13,8 +13,10 @@ export enum GameViewEvent {
     mergeCells = "GameViewEventMergeCells"
 }
 
-
-
 export enum CtaViewEvent {
     playAgainClick = "CtaViewEventPlayAgainClick"
+}
+
+export enum SoundViewEvent {
+    onClick = "SoundViewEventOnClick"
 }

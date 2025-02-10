@@ -64,7 +64,7 @@ export class CTAView extends PixiGrid {
     }
 
     private _buildButton(): Container {
-        const buttonBg = new Sprite(Texture.from('button.png'));
+        const buttonBg = new Sprite(Texture.from('cya_button.png'));
         buttonBg.anchor.set(0.5);
         const buttonText = makeText({
             text: 'Play Again',

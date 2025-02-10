@@ -32,3 +32,8 @@ export enum CellModelEvent {
 export enum HintModelEvent {
     stateUpdate = "HintModelStateUpdate"
 }
+
+
+export enum SoundModelEvent {
+    stateUpdate = "SoundModelStateUpdate"
+}
